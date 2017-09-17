@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Home {{title}} </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <strong>Welcome to PouchDB!</strong>
+  <div *ngIf="pouchdbLoaded">
+    <p>
+      Is IndexedDB supported? {{ idbSupported ? '✅' : '❌' }}
+    </p>
+    <p>
+      Is WebSQL supported? {{ websqlSupported ? '✅' : '❌' }}
+    </p>
+    <p>
+      Is Cordova SQLite supported? {{ cordovaSqliteSupported ? '✅' : '❌' }}
+    </p>
+    <p>
+      Is the native SQLite Plugin installed? {{ nativeSqlitePluginInstalled ? '✅' : '❌' }}
+  </div>
+
+  
+<button (click)="initPdb()">INIT blya!</button>
+<span>  |  </span>
+<button (click)="addPdb()">Suka dobavil da?</button>
+<hr>
+<br> 
+<button (click)="addNew()">ADD</button>
+
+<hr>
+  <div>
+    <div class='wrapper' style='clear:both'>
+      <div class='container' style='min-width:150px; min-height:10px; background-color: #9bb; float:left; width: 30%' [dragula]='"first-bag"' [dragulaModel]='items'>
+        <div *ngFor="let item of items"  style='background-color: #c8edee; padding: 2px; margin: 2px;'>
+            {{item.name}} [ {{item.price}} ]
+        </div>
+      </div>
+      <div class='container' style='min-width:150px; min-height:10px; background-color: #bb9; float:left; width: 30%' [dragula]='"first-bag"' [dragulaModel]='items2'>
+        <div *ngFor="let item2 of items2"  style='background-color: #dce6b9; padding: 2px; margin: 2px;'>
+            {{item2.name}}
+        </div>
+      </div>
+      <div class='container' style='min-width:150px; min-height:2px; background-color: #ce9b00; float:left; width: 30%' [dragula]='"first-bag"' [dragulaModel]='items3'>
+        <div *ngFor="let item3 of items3"  style='background-color: #ffecb0; padding: 2px; margin: 2px;'>
+            {{item3.name}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+<ion-list-header> List Header</ion-list-header>
+<ion-list> <!-- reorder="true" (ionItemReorder)="reorderItems($event)"> -->
+    <ion-item-group reorder="true" (ionItemReorder)="reorderItems($event)">
+<!--
+-->
+    <ion-item-sliding *ngFor="let item of items; let ind = index;" id=ind (click)="toggle( ind, $event )">
+      <ion-item >
+        [ {{item.id}} ]: {{item.name}} ( {{ind}} )  {{item.price}}
+      </ion-item>
+
+      <ion-item-options side="left">
+        <button ion-button (click)="favorite(item)">Favorite</button>
+        <button ion-button color="danger" (click)="share(item)">Share</button>
+      </ion-item-options>
+
+      <ion-item-options side="right">
+        <button ion-button (click)="unread(item)">Unread</button>
+      </ion-item-options>
+    </ion-item-sliding>
+<!--
+-->
+    </ion-item-group>
+
+  <ion-item-divider>  ==== in progress ====  </ion-item-divider>
+  <ion-item-group reorder="true" (ionItemReorder)="reorderItems2($event)">
+    <ion-item *ngFor="let item2 of items2">
+      {{item2.name}}
+    </ion-item>
+  </ion-item-group>
+
+  <ion-item-divider>  -= ! DONE ! =-  </ion-item-divider>
+  <ion-item-group reorder="true" (ionItemReorder)="reorderItems3($event)">
+    <ion-item *ngFor="let item3 of items3">
+      {{item3.name}}
+    </ion-item>
+  </ion-item-group>
+</ion-list>
+
+<!--
+<hr>
+ <table border="1">
+      <tr *ngFor="let item of items">
+          <td padding="3px">{{item.name}}</td>
+          <td padding="3px">{{item.price}}</td>
+      </tr>
+  </table>
+
+    <button primary (click)="delMe()">DELETE LAST</button>
+-->
+</ion-content>
